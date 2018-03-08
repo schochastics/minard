@@ -13,6 +13,11 @@ idx <- sapply(Minard.temp$long,function(x)which(abs(Minard.cities$long-x)==min(a
 Minard.temp2 <- data.frame(long=rev(Minard.temp$long),
                            lat=c(54.4,54.3,54.4,54.1,54.2,54.6,54.8,55.2,55.7))
 
+Minard.temp <-Minard.temp %>% 
+  mutate(date = as.character(date)) %>% 
+  mutate(date = format(as.Date(date,format = "%b%d"), "%B %d")) %>% 
+  mutate(date = ifelse(is.na(date),"",date)) 
+  
 p1 <- ggplot()+
   geom_segment(data=Minard.temp2,aes(x=long,y=lat,xend=long,yend=53.2),size=0.2)+
   geom_path(data=Minard.troops,aes(x=long,y=lat,size=survivors,col=direction,group=group),
@@ -31,9 +36,9 @@ p1 <- ggplot()+
         plot.margin=unit(c(0,0,-0.7,0),"cm")
   )
 p1
-p2 <- ggplot(Minard.temp,aes(x=long,y=temp,label=date))+
+p2 <- ggplot(Minard.temp,aes(x=long,y=temp,label=paste0(temp,"° ",date)))+
   geom_line()+
-  geom_text(family = "EB Garamond 08",size=4,vjust=1)+
+  geom_text(family = "EB Garamond 08",size=4,vjust=1,hjust=c(rep(0,8),1))+
   scale_x_continuous(limits=c(24,38),name="")+
   scale_y_continuous(limits=c(-31.5,0),position = "right",name="")+
   ggtitle(label ="GRAPHIC TABLE of the temperature in degrees below zero of the Réaumur thermometer")+
