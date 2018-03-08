@@ -27,7 +27,10 @@ p1 <- ggplot()+
   scale_color_manual(values=c("#D7C181","#424242"))+
   scale_size(range=c(1,10),breaks = c(1e5,2e5,3e5))+
   geom_text_repel(data=Minard.cities,aes(long,lat,label=city),segment.alpha = 0,
-                  family = "EB Garamond 08",size=4)+
+                  family = "EB Garamond 08",
+                  size=ifelse(Minard.cities$city=="Moscou",8,4),
+                  nudge_x = ifelse(Minard.cities$city=="Moscou",2,0),
+                  nudge_y = ifelse(Minard.cities$city=="Moscou",2,0))+
   theme(panel.background = element_blank(),
         axis.ticks = element_blank(),
         axis.text = element_blank(),
@@ -49,8 +52,8 @@ p2 <- ggplot(Minard.temp,aes(x=long,y=temp,label=paste0(temp,"° ",date)))+
         panel.grid.major.y = element_line(color="black",size=0.1),
         panel.grid.major.x = element_blank(),
         panel.grid.minor = element_blank(),
-        plot.margin=unit(c(-1,0,0,0),"cm"),
-        plot.title= element_text(hjust=0.5,size=12,family="EB Garamond 08")
+        plot.margin = unit(c(-1,0,0,0),"cm"),
+        plot.title = element_text(hjust=0.5,size=12,family="EB Garamond 08")
         )+
   geom_segment(aes(xend=long,yend=0),size=0.2)
 
