@@ -1,0 +1,52 @@
+port,country,region,location,traffic,link,lat,lon
+Shanghai,China,East Asia,Yangtze Delta,42010,https://en.wikipedia.org//wiki/Port_of_Shanghai,30.626538999999998,122.064958
+Singapore,Singapore,Southeast Asia,Singapore Strait,36660,https://en.wikipedia.org//wiki/Port_of_Singapore,1.264,103.84
+Shenzhen,China,East Asia,Pearl River Delta,27740,https://en.wikipedia.org//wiki/Port_of_Shenzhen,22.5415,114.0596
+Ningbo-Zhoushan,China,East Asia,Yangtze Delta,26350,https://en.wikipedia.org//wiki/Port_of_Ningbo,29.867,121.55
+Guangzhou,China,East Asia,Pearl River Delta,21870,https://en.wikipedia.org//wiki/Port_of_Guangzhou,23.132,113.266
+Busan,South Korea,East Asia,Korean Strait,21660,https://en.wikipedia.org//wiki/Port_of_Busan,35.10389,129.07889
+Hong Kong,"Hong Kong, China",East Asia,Pearl River Delta,19600,https://en.wikipedia.org//wiki/Port_of_Hong_Kong,22.3,114.2
+Qingdao,China,East Asia,Yellow Sea,18260,https://en.wikipedia.org//wiki/Port_of_Qingdao,36.066900000000004,120.38269999999999
+Tianjin,China,East Asia,Yellow Sea,16000,https://en.wikipedia.org//wiki/Port_of_Tianjin,38.97583,117.78750000000001
+Dubai,United Arab Emirates,West Asia,Arab Peninsula,14950,https://en.wikipedia.org//wiki/Port_of_Jebel_Ali,25.011260000000004,55.06116
+Rotterdam,Netherlands,Europe,Rhine delta,14510,https://en.wikipedia.org//wiki/Port_of_Rotterdam,51.885,4.286700000000001
+Port Klang,Malaysia,Southeast Asia,Malacca Strait,12320,https://en.wikipedia.org//wiki/Port_Klang,3,101.4
+Antwerp,Belgium,Europe,Scheldt delta,11100,https://en.wikipedia.org//wiki/Port_of_Antwerp,51.27,4.336670000000001
+Xiamen,China,East Asia,Taiwan Strait,10702,https://en.wikipedia.org//wiki/Port_of_Xiamen,24.479599999999998,118.0889
+Kaohsiung,Taiwan,East Asia,Taiwan Strait,10450,https://en.wikipedia.org//wiki/Port_of_Kaohsiung,22.61333,120.27917
+Dalian,China,East Asia,Yellow Sea,9770,https://en.wikipedia.org//wiki/Port_of_Dalian,38.913999999999994,121.6148
+Los Angeles,United States,North America,West Coast,9460,https://en.wikipedia.org//wiki/Port_of_Los_Angeles,33.72918580000001,-118.262015
+Tanjung Pelepas,Malaysia,Southeast Asia,Malacca Strait,8960,https://en.wikipedia.org//wiki/Tanjung_Pelepas,1.3663472,103.5483667
+Hamburg,Germany,Europe,Elbe River,8730,https://en.wikipedia.org//wiki/Hamburg_Harbour,53.56528,10.001389999999999
+Long Beach,United States,North America,West Coast,8090,https://en.wikipedia.org//wiki/Port_of_Long_Beach,33.754185,-118.216458
+Laem Chabang,Thailand,Southeast Asia,Gulf of Thailand,8070,https://en.wikipedia.org//wiki/Laem_Chabang,13.083,100.883
+Tanjung Priok,Indonesia,Southeast Asia,Java Sea,7640,https://en.wikipedia.org//wiki/Port_of_Tanjung_Priok,-6.103999999999999,106.8865
+New York,United States,North America,East Coast,7200,https://en.wikipedia.org//wiki/Port_of_New_York_and_New_Jersey,40.712740000000004,-74.005974
+Colombo,Sri Lanka,South Asia,Sri Lanka,7050,https://en.wikipedia.org//wiki/Colombo_Harbour,6.95278,79.84472000000001
+Yingkou,China,East Asia,Liaodong Bay,6500,https://en.wikipedia.org//wiki/Port_of_Yingkou,40.62500000000001,122.21900000000001
+Saigon,Vietnam,Southeast Asia,East Vietnam Sea,6330,https://en.wikipedia.org//wiki/Saigon_Port,10.8,106.64999999999999
+Bremerhaven,Germany,Europe,North Sea,5420,https://en.wikipedia.org//wiki/Port_of_Bremerhaven,53.55,8.58333
+Valencia,Spain,Europe,Western Mediterranean,5128,https://en.wikipedia.org//wiki/Port_of_Valencia,39.4457,-0.3199
+Manila,Philippines,Southeast Asia,Manila Bay,5050,https://en.wikipedia.org//wiki/Port_of_Manila,14.59667,120.95444
+Taicang,China,East Asia,Yangtze Delta,5071,https://en.wikipedia.org//wiki/Taicang,31.564,121.17399999999999
+Mumbai,India,South Asia,Arabian Sea,5050,https://en.wikipedia.org//wiki/Jawaharlal_Nehru_Port,18.95,72.95
+Piraeus,Greece,Europe,Eastern Mediterranean,4910,https://en.wikipedia.org//wiki/Port_of_Piraeus,37.94194399999999,23.636111000000003
+Algeciras,Spain,Europe,Western Mediterranean,4770,https://en.wikipedia.org//wiki/Port_of_Algeciras,36.127500000000005,-5.45389
+Lianyungang,China,East Asia,Yellow Sea,4750,https://en.wikipedia.org//wiki/Lianyungang,34.5966,119.2214
+Tokyo,Japan,East Asia,Tokyo Bay,4570,https://en.wikipedia.org//wiki/Port_of_Tokyo,35.68972,139.69222000000002
+Mundra,India,South Asia,Gulf of Kutch,4440,https://en.wikipedia.org//wiki/Mundra_Port,22.746,69.7
+Savannah,United States,North America,East Coast,4350,https://en.wikipedia.org//wiki/Port_of_Savannah,32.12870500000001,-81.151907
+Jeddah,Saudi Arabia,West Asia,Red Sea,4120,https://en.wikipedia.org//wiki/Jeddah_Seaport,21.543329999999997,39.17278
+Santos,Brazil,South America,South Atlantic Ocean,4120,https://en.wikipedia.org//wiki/Port_of_Santos,-23.982227799999993,-46.29260560000001
+Port of Gioia Tauro,Italy,Europe,Mediterranean Sea,4005,https://en.wikipedia.org//wiki/Port_of_Gioia_Tauro,38.433,15.9
+Rizhao,China,East Asia,Yellow Sea,4000,https://en.wikipedia.org//wiki/Rizhao,35.416999999999994,119.527
+Colón,Panama,Central America,Caribbean coast,3890,"https://en.wikipedia.org//wiki/Col%C3%B3n,_Panama",9.35722,-79.89861
+Tanjung Perak,Indonesia,Southeast Asia,Madura Strait,3866,https://en.wikipedia.org//wiki/Port_of_Tanjung_Perak,-7.1983299999999995,112.72277999999999
+Felixstowe,United Kingdom,Europe,North Sea,3850,https://en.wikipedia.org//wiki/Port_of_Felixstowe,51.9529,1.3094999999999999
+Seattle/Tacoma,United States,North America,West Coast,3800,https://en.wikipedia.org//wiki/Port_of_Seattle,47.44889,-122.30944
+Dongguan,China,East Asia,Pearl River Delta,3500,https://en.wikipedia.org//wiki/Dongguan,23.021,113.752
+Tanger-Med,Morocco,Africa,North Africa,3470,https://en.wikipedia.org//wiki/Tanger-Med,35.874979999999994,-5.520709999999999
+Barcelona,Spain,Europe,Western Mediterranean,3420,https://en.wikipedia.org//wiki/Port_of_Barcelona,41.3375,2.15222
+Vancouver,Canada,North America,West Coast,3400,https://en.wikipedia.org//wiki/Vancouver_Fraser_Port_Authority,49.27694,-123.12082999999998
+Salalah,Oman,West Asia,Arabian Sea,3390,https://en.wikipedia.org//wiki/Port_of_Salalah,16.948059999999998,54.00889
+Fuzhou,China,East Asia,Taiwan Strait,3340,https://en.wikipedia.org//wiki/Port_of_Fuzhou,26.0743,119.2964

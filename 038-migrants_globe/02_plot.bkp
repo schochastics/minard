@@ -1,0 +1,199 @@
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(ggtext)
+
+setwd("038-migrants_globe/")
+
+center_NA <- c(-100.167,45.167)
+center_SA <- c(-56.1004,-15.6006)
+center_AF <- c(14.100526,1.616742)
+center_AS <- c(76.08583,38.48333)
+center_AU <- c(132.133,-25.117)
+
+land <- sf::st_read("../000-data/naturalearth/ne_110m_land/ne_110m_land.shp")
+land_clip <- sf::st_crop(land,c(xmin=-127.3,ymin=-57.8,xmax=175.7,ymax=75.8))
+
+gtree_uk <- readRDS("results/gtree_uk_005.RDS")
+gtree_chn <- readRDS("results/gtree_chn_002.RDS")
+gtree_ind <- readRDS("results/gtree_ind_001.RDS")
+
+#combine network smartly manually
+ctries <- c("uk","chn","ind")
+glist <- list(
+  as_data_frame(gtree_uk,"both"),
+  as_data_frame(gtree_chn,"both"),
+  as_data_frame(gtree_ind,"both")
+)
+
+verts <- map_dfr(1:length(glist), function(i) mutate(glist[[i]]$vertices,name=paste0(ctries[i],"_",name),ctry=ctries[i]))
+edges <- map_dfr(1:length(glist), function(i) mutate(glist[[i]]$edges,
+                                                     from=paste0(ctries[i],"_",from),
+                                                     to=paste0(ctries[i],"_",to),
+                                                     ctry=ctries[i]))
+verts <- verts %>% select(name,ctry,tnss,x,y)
+gtree <- graph_from_data_frame(edges,F,verts)
+
+
+el <- get.edgelist(gtree)
+idl <- which(!str_detect(el[,1],"dummy|China|United Kingdom|India") | !str_detect(el[,2],"dummy|China|United Kingdom|India"))
+E(gtree)$label <- ""
+E(gtree)$label[idl] <- scales::label_number_si(accuracy = 0.1)(E(gtree)$flow[idl])
+E(gtree)$flow_norm <- ambient::normalise(E(gtree)$flow,to=c(1,6))
+
+map_title <- "<span style='font-size:32pt'>FIGURATIVE MAP representing<br>EMIGRANTS around the WORLD (2005-2010)</span>"
+ctry_labels <- str_pad(c("*China*","*India*","*United Kingdom*"),width = 22,side = "right",pad = ".")
+
+ggraph(gtree,"manual",x=V(gtree)$x,y=V(gtree)$y)+
+  geom_sf(data=land_clip,fill="#e8e4c9",colour="black",size=0.3)+
+  geom_edge_link(aes(filter=ctry=="ind",width=I(flow_norm+0.3),label=label),edge_color="black",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_edge_link(aes(filter=ctry=="ind",width=I(flow_norm),label=label),edge_color="#997243",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_edge_link(aes(filter=ctry=="chn",width=I(flow_norm+0.3),label=label),edge_color="black",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_edge_link(aes(filter=ctry=="chn",width=I(flow_norm),label=label),edge_color="#ffffbf",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_edge_link(aes(filter=ctry=="uk",width=I(flow_norm+0.3),label=label),edge_color="black",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_edge_link(aes(filter=ctry=="uk",width=I(flow_norm),label=label),edge_color="#86a873",family = "EB Garamond 08",label_size=2,
+                 lineend = "round",show.legend = FALSE)+
+  geom_node_point(aes(fill=ctry),shape=21,alpha=0)+
+  scale_fill_manual(values=c(ind="#997243",uk="#86a873",chn="#ffffbf"),labels=ctry_labels,name="**Emigrating from**")+
+  annotate("richtext",x=center_NA[1],y=center_NA[2],label="*NORTH AMERICA*",size=7,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=1,family="EB Garamond 08")+
+  annotate("richtext",x=center_SA[1],y=center_SA[2],label="*SOUTH AMERICA*",size=7,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AF[1],y=center_AF[2],label="*AFRICA*",size=7,hjust=0,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AS[1],y=center_AS[2],label="*ASIA*",size=7,hjust=0,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AU[1],y=center_AU[2],label="*AUSTRALIA*",size=7,hjust=0.5,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0.5,family="EB Garamond 08")+
+  coord_sf(expand=FALSE)+
+  
+  #title
+  annotate("richtext",x=-Inf,y=Inf,hjust=0,vjust=1,label=map_title,
+           size=8,fill="#f2eecb",family="EB Garamond 08",
+           label.padding = unit(c(3.25, 1.0, 3.0, 1.0), "lines"))+
+  #caption
+  annotate("richtext",x=Inf,y=-Inf,hjust=1,vjust=0,label="<span style='font-size:6pt'>redrawn by *@schochastics*</span>",
+           size=8,fill=NA,family="EB Garamond 08",label.color=NA,
+           label.padding = unit(c(0.2, 0.2, 0.2, 0.2), "lines"))+
+  theme_void()+
+  theme(legend.position = c(1,1),
+        legend.text = element_markdown(family="Xanh Mono",size=24),
+        legend.title = element_markdown(family="EB Garamond 08",size=30),
+        legend.justification = c(1,1), legend.margin=margin(c(25,25,25,25), "pt"),
+        legend.background = element_rect(colour="black",fill="#f2eecb"),
+        plot.title = element_text(family="EB Garamond 08",size=46,hjust=0,margin=margin(0,0,0,0)),
+        plot.background = element_rect(fill="#f2eecb",colour="black",size=0.5),
+        panel.background = element_rect(fill="#f2eecb",colour="black",size=0.1))+
+  guides(fill = guide_legend(label.position = "left",override.aes = list(size=14,alpha=1,shape=22),
+                             title.position = "left")) 
+
+h <- 20
+w <- h*1.28976
+
+ggsave("038-migrants_globe.png",width = w,height = h,dpi = 300)
+
+#smoothed
+smooth_uk <- edgebundle::tnss_smooth(induced_subgraph(gtree_uk,which(degree(gtree_uk)!=0)),bw=15,n=50) %>% 
+  mutate(ctry="uk",destination=paste0(ctry,"_",destination))
+smooth_ch <- edgebundle::tnss_smooth(induced_subgraph(gtree_chn,which(degree(gtree_chn)!=0)),bw=15,n=50) %>% 
+  mutate(ctry="chn",destination=paste0(ctry,"_",destination))
+smooth_in <- edgebundle::tnss_smooth(gtree_ind,bw=15,n=50) %>% 
+  mutate(ctry="ind",destination=paste0(ctry,"_",destination))
+
+smooth_tbl <- bind_rows(smooth_uk,smooth_ch,smooth_in) %>% 
+  mutate(flow=ambient::normalise(flow,to=c(1,6)))
+
+dest_tbl <- as_data_frame(gtree,"vertices") %>% 
+  dplyr::filter(tnss!="dummy",tnss!="root") %>%
+  mutate(name=str_remove_all(name,"[a-z]{2,3}_")) %>% 
+  select(name,x,y) %>% 
+  dplyr::filter(!name%in%c("Rwanda","South Sudan","Burundi")) %>% 
+  distinct(name,.keep_all = TRUE)
+
+ggraph(gtree,"manual",x=V(gtree)$x,y=V(gtree)$y)+
+  geom_sf(data=land_clip,fill="#e8e4c9",colour="black",size=0.3)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="ind",],aes(x,y,size=I(flow+0.3),group=destination),lineend = "round",col="black",show.legend = FALSE)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="ind",],aes(x,y,size=I(flow),group=destination),lineend = "round",col="#997243",show.legend = FALSE)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="chn",],aes(x,y,size=I(flow+0.3),group=destination),lineend = "round",col="black",show.legend = FALSE)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="chn",],aes(x,y,size=I(flow),group=destination),lineend = "round",col="#ffffbf",show.legend = FALSE)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="uk",],aes(x,y,size=I(flow+0.3),group=destination),lineend = "round",col="black",show.legend = FALSE)+
+  geom_path(data=smooth_tbl[smooth_tbl$ctry=="uk",],aes(x,y,size=I(flow),group=destination),lineend = "round",col="#86a873",show.legend = FALSE)+
+  # # 
+  # geom_path(data=smooth_tbl,aes(x,y,size=I(flow+0.3),group=destination),col="black",show.legend = FALSE)+
+  # geom_path(data=smooth_tbl,aes(x,y,size=I(flow),group=destination,col=ctry),show.legend = FALSE)+
+  # 
+  geom_node_point(aes(fill=ctry),shape=21,alpha=0)+
+  geom_text(data=dest_tbl,aes(x,y,label=name),family="EB Garamond 08",size=3)+
+  scale_fill_manual(values=c(ind="#997243",uk="#86a873",chn="#ffffbf"),labels=ctry_labels,name="**Emigrating from**")+
+  # scale_color_manual(values=c(ind="#997243",uk="#86a873",chn="#ffffbf"))+
+  annotate("richtext",x=center_NA[1],y=center_NA[2],label="*NORTH AMERICA*",size=7,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=1,family="EB Garamond 08")+
+  annotate("richtext",x=center_SA[1],y=center_SA[2],label="*SOUTH AMERICA*",size=7,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AF[1],y=center_AF[2],label="*AFRICA*",size=7,hjust=0,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AS[1],y=center_AS[2],label="*ASIA*",size=7,hjust=0,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0,family="EB Garamond 08")+
+  annotate("richtext",x=center_AU[1],y=center_AU[2],label="*AUSTRALIA*",size=7,hjust=0.5,
+           fill=NA,colour="black",label.colour=NA,
+           lineheight=0.6,vjust=0.5,family="EB Garamond 08")+
+  coord_sf(expand=FALSE)+
+  
+  #title
+  annotate("richtext",x=-Inf,y=Inf,hjust=0,vjust=1,label=map_title,
+           size=8,fill="#f2eecb",family="EB Garamond 08",
+           label.padding = unit(c(3.25, 1.0, 3.0, 1.0), "lines"))+
+  #caption
+  annotate("richtext",x=Inf,y=-Inf,hjust=1,vjust=0,label="<span style='font-size:6pt'>redrawn by *@schochastics*</span>",
+           size=8,fill=NA,family="EB Garamond 08",label.color=NA,
+           label.padding = unit(c(0.2, 0.2, 0.2, 0.2), "lines"))+
+  theme_void()+
+  theme(legend.position = c(1,1),
+        legend.text = element_markdown(family="Xanh Mono",size=24),
+        legend.title = element_markdown(family="EB Garamond 08",size=30),
+        legend.justification = c(1,1), legend.margin=margin(c(25,25,25,25), "pt"),
+        legend.background = element_rect(colour="black",fill="#f2eecb"),
+        plot.title = element_text(family="EB Garamond 08",size=46,hjust=0,margin=margin(0,0,0,0)),
+        plot.background = element_rect(fill="#f2eecb",colour="black",size=0.5),
+        panel.background = element_rect(fill="#f2eecb",colour="black",size=0.1))+
+  guides(fill = guide_legend(label.position = "left",override.aes = list(size=14,alpha=1,shape=22),
+                             title.position = "left")) 
+
+ggsave("038-migrants_globe_smoothed.png",width = w,height = h,dpi = 300)
+
+#all migration
+dat <- readRDS("results/bundling_all.RDS")
+
+hbundle <- dat$hbundle
+fbundle <- dat$fbundle
+
+ggplot()+
+  geom_sf(data=land,fill="#e8e4c9",colour="black",size=0.2)+
+  geom_path(data = hbundle,aes(x,y,group=group,size=I(size)),col="black",alpha=0.5)+
+  geom_path(data = hbundle,aes(x,y,group=group,size=I(size/10)),col="white")+
+  theme_graph(background = "#f2eecb")+
+  coord_sf(ylim = range(-55,90),clip = "on")
+
+ggplot()+
+  geom_sf(data=land,fill="#e8e4c9",colour="black",size=0.2)+
+  geom_path(data = fbundle,aes(x,y,group=group,size=I(size)),col="black",alpha=0.5)+
+  geom_path(data = fbundle,aes(x,y,group=group,size=I(size/10)),col="white")+
+  theme_graph(background = "#f2eecb")+
+  coord_sf(ylim = range(-55,90),clip = "on")+
+  theme(plot.title = element_text(family="EB Garamond 08",size=46,hjust=0,margin=margin(0,0,0,0)))+
+  labs(title="Global Migration 2005-2010")
+  

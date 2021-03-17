@@ -1,0 +1,28 @@
+# https://oec.world/en/profile/country/fra
+# scrape
+df <- vector("list",19)
+df[[19]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2018&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[18]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2017&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[17]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2016&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[16]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2015&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[15]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2014&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[14]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2013&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[13]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2012&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[12]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2011&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[11]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2010&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[10]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2009&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[9]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2008&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[8]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2007&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[7]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2006&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[6]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2005&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[5]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2004&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[4]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2003&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[3]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2002&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[2]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2001&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+df[[1]] <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_i_baci_a_92&Exporter+Country=eufra&HS4=42204&Year=2000&drilldowns=Importer+Country&locale=en&measures=Trade+Value&parents=true&sparse=false&properties=Importer+Country+ISO+3&q=Trade%20Value")
+
+years <- 2000:2019
+wine <- map_dfr(1:length(df),function(x) df[[x]]$data %>% mutate(year=years[x]) %>% as_tibble() %>% janitor::clean_names())
+gbr_import <- jsonlite::fromJSON("https://oec.world/olap-proxy/data?cube=trade_s_gbr_m_hs&drilldowns=Time,Trade+Flow&measures=Trade+Value&parents=true&sparse=false&Year=2011,2012,2013,2014,2015,2016,2017,2018,2019,2020&exclude=Subnat+Geography&Trade+Flow=1&HS4=42204&q=202008,0")$data
+
+#routes downloaded from (https://towardsdatascience.com/creating-sea-routes-from-the-sea-of-ais-data-30bc68d8530e)
