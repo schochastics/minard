@@ -8,7 +8,7 @@ once declared this to be "the best statistical graphic ever drawn".
 What you might not know is that its creator, [Charles Joseph Minard](https://en.wikipedia.org/wiki/Charles_Joseph_Minard), made far more significant contributions in the field of information graphics. Especially with his flow maps.
 [Sandra Rendgen](https://twitter.com/srendgen) dedicated a book, "The Minard System", which shows 61 maps and plots
 that Minard produced during his lifetime. The book is really inspiring and I can only recommend it. One cold winter day in 
-early 2021, I decided to try to recreate some of Minards work with R. I was particularly interested in his [flow maps](https://heritage.ecoledesponts.fr/ark:/12148/btv1b104811770.r=Minard?rk=300430;4). This was also actually the starting point for me to develop the R package `edgebundle`. I had the ambitious goal to reproduce as many of his 61 drawings as possible and thus far managed to do `r length(list.files(pattern="viz"))`. 
+early 2021, I decided to try to recreate some of Minards work with R. I was particularly interested in his [flow maps](https://heritage.ecoledesponts.fr/ark:/12148/btv1b104811770.r=Minard?rk=300430;4). This was also actually the starting point for me to develop the R package `edgebundle`. I had the ambitious goal to reproduce as many of his 61 drawings as possible. 
 
 ## (11) Ports in France I
 
